@@ -1,0 +1,134 @@
+[
+  {
+    "id": "carte-paravent",
+    "title": "Carte Paravent (4 saisons)",
+    "description": "Carte autoportante à 4 panneaux perforés illustrant les quatre saisons, avec mesures complètes de coupe et de pliage.",
+    "coverImage": "/tutoriels/previews/tutoriel-carte-paravent.jpg",
+    "pagesCount": "3 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-carte-paravent.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "double-sided-step-card",
+    "title": "Carte escalier double face (Double Sided Step Card)",
+    "description": "Plan de coupe détaillé pour une carte à paliers symétriques avec décorations et patron d’enveloppe boîte assortie.",
+    "coverImage": "/tutoriels/previews/tutoriel-double-sided-step-card.jpg",
+    "pagesCount": "3 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-double-sided-step-card.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "carte-boite-card-in-a-box",
+    "title": "Carte-boîte fleurie 3D (Card in a Box)",
+    "description": "Carte spectaculaire qui se déploie en petit jardin floral en trois dimensions et se replie à plat pour l’envoi postal.",
+    "coverImage": "/tutoriels/previews/tutoriel-card-in-a-box.jpg",
+    "pagesCount": "3 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-card-in-a-box.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "tri-fold-card",
+    "title": "Carte diagonale à trois volets (Tri-Fold Card)",
+    "description": "Méthode astucieuse au coupe-papier pour obtenir deux bases de cartes à pliage diagonal en une seule coupe.",
+    "coverImage": "/tutoriels/previews/tutoriel-tri-fold-card.jpg",
+    "pagesCount": "3 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Turoriel-Tri-fold-card.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "framelits-labels-collection",
+    "title": "Carte découpée aux Framelits « Labels Collection »",
+    "description": "Deux formats (paysage et portrait) utilisant la découpe partielle à la Big Shot pour une bordure découpée sur mesure.",
+    "coverImage": "/tutoriels/previews/tutoriel-framelits-labels.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-Framelits-Labels-collection-2.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "porte-post-it",
+    "title": "Porte Post-it chevalet avec pochette",
+    "description": "Support de bureau pliable en accordéon doté d’une pochette avant coordonnée, idéal comme petit cadeau d’atelier.",
+    "coverImage": "/tutoriels/previews/tutoriel-porte-post-it.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-Porte-Post-it.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "etiquette-festonnee",
+    "title": "Carte à rabat « Étiquette festonnée »",
+    "description": "Carte à deux volets asymétriques façonnée avec la perforatrice Étiquette festonnée et nouée d’un ruban.",
+    "coverImage": "/tutoriels/previews/carte-etiquette-festonnee.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Carte-faite-avec-la-perforatrice-etiquette-festonnee.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "boitier-pour-cartes",
+    "title": "Boîtier cadeau pour ensemble de cartes",
+    "description": "Coffret rigide conçu pour ranger et offrir de 3 à 6 cartes standard 5 ½\" × 4 ¼\" avec leurs enveloppes.",
+    "coverImage": "/tutoriels/previews/tutoriel-boitier-pour-cartes.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-boitier-pour-cartes.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "carte-pour-billets",
+    "title": "Carte pochette pour billets et cartes-cadeaux",
+    "description": "Carte longue à rabat avec pochette intérieure découpée à l’aide de la planche Insta’ Enveloppes.",
+    "coverImage": "/tutoriels/previews/tutoriel-carte-billets.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/tutoriel-carte-billets.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "page-scrapbooking-shabby-chic",
+    "title": "Page de scrapbooking « Shabby Chic »",
+    "description": "Technique d’estampage au plioir à gaufrer, effets vieillis à l’éponge et découpes de papillons en superposition.",
+    "coverImage": "/tutoriels/previews/page-scrapbooking-shabby-chic.jpg",
+    "pagesCount": "2 pages",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Page-de-scrapbooking-shabby-chic.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "carte-pliage-original",
+    "title": "Carte à pliage original (pouces et cm)",
+    "description": "Carte à bande coulissante horizontale accompagnée des mesures exactes en pouces et en centimètres.",
+    "coverImage": "/tutoriels/previews/tutoriel-carte-pliage-original.jpg",
+    "pagesCount": "1 page",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Tutoriel-carte-pliage-original.pdf",
+    "checkoutUrl": ""
+  },
+  {
+    "id": "dimension-de-cartes",
+    "title": "Aide-mémoire : Dimensions d’une carte standard",
+    "description": "Fiche de référence rapide pour couper la base (portrait ou paysage) et les cartons superposés assortis.",
+    "coverImage": "/tutoriels/previews/dimension-de-cartes.jpg",
+    "pagesCount": "1 page",
+    "isPaid": false,
+    "price": "0,00 $",
+    "fileUrl": "/tutoriels/Dimension-de-cartes.pdf",
+    "checkoutUrl": ""
+  }
+]

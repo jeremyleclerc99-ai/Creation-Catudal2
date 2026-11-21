@@ -1,0 +1,6 @@
+{
+  "name": "Création Catudal — Architecture & Prototype",
+  "description": "Blueprint stratégique de conversion, système de design et prototype interactif pour la refonte Astro + Tailwind CSS de Création Catudal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
