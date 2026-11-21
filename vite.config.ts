@@ -1,3 +1,4 @@
+// v3
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
@@ -9,7 +10,7 @@ const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(() => {
   return {
-    base: '/creation-catudal2/',
+    base: './',
     plugins: [
       react(),
       tailwindcss(),

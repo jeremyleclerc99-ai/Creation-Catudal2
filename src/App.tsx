@@ -20,24 +20,32 @@ const CORE_PAGE_ROUTES = new Set<string>([
   '/contact/',
 ]);
 
-const BASE_PREFIX = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+const RAW_BASE = import.meta.env.BASE_URL || '/';
+const BASE_PREFIX =
+  RAW_BASE.startsWith('/') && RAW_BASE !== '/' ? RAW_BASE.replace(/\/+$/, '') : '';
+
+function detectRepoSubpath(pathname: string): string {
+  if (BASE_PREFIX) return BASE_PREFIX;
+  if (pathname === '/creation-catudal2' || pathname.startsWith('/creation-catudal2/')) {
+    return '/creation-catudal2';
+  }
+  return '';
+}
 
 function stripBasePrefix(pathname: string): string {
-  if (!BASE_PREFIX) return pathname;
-  if (pathname === BASE_PREFIX || pathname === `${BASE_PREFIX}/`) return '/';
-  if (pathname.startsWith(`${BASE_PREFIX}/`)) {
-    return pathname.slice(BASE_PREFIX.length);
+  const prefix = detectRepoSubpath(pathname);
+  if (!prefix) return pathname;
+  if (pathname === prefix || pathname === `${prefix}/`) return '/';
+  if (pathname.startsWith(`${prefix}/`)) {
+    return pathname.slice(prefix.length);
   }
   return pathname;
 }
 
 function getBasePathname(): string {
   if (typeof window === 'undefined') return `${BASE_PREFIX}/`;
-  const pathname = window.location.pathname;
-  if (BASE_PREFIX && (pathname === BASE_PREFIX || pathname.startsWith(`${BASE_PREFIX}/`))) {
-    return `${BASE_PREFIX}/`;
-  }
-  return '/';
+  const prefix = detectRepoSubpath(window.location.pathname);
+  return prefix ? `${prefix}/` : '/';
 }
 
 function normalizeRoutePath(input: string): RouteSlug {
