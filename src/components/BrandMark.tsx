@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withBase } from '../data/siteArchitecture';
 
 interface BrandMarkProps {
   variant?: 'default' | 'inverted';
@@ -17,7 +18,7 @@ export const BrandMark: React.FC<BrandMarkProps> = ({ variant = 'default', class
     return (
       <div className={`inline-flex items-center select-none ${className}`}>
         <img
-          src="/assets/aistudio/logo-100x200-1_f1ab239a.png"
+          src={withBase('/assets/aistudio/logo-100x200-1_f1ab239a.png')}
           alt="Création Catudal"
           referrerPolicy="no-referrer"
           onError={() => setImgError(true)}

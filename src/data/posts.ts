@@ -1,6 +1,6 @@
 import rawPostsData from './posts.json';
 import rawAssetMap from './assetMap.json';
-import type { RouteSlug } from './siteArchitecture';
+import { withBase, type RouteSlug } from './siteArchitecture';
 
 const ASSET_MAP = rawAssetMap as Record<string, string>;
 
@@ -116,7 +116,7 @@ export function resolveAssetUrl(rawUrl: string | undefined | null): string | nul
   if (!trimmed) return null;
 
   if (trimmed.startsWith('/assets/aistudio/')) {
-    return trimmed;
+    return withBase(trimmed);
   }
 
   const withoutQuery = trimmed.split(/[?#]/)[0];
@@ -126,8 +126,8 @@ export function resolveAssetUrl(rawUrl: string | undefined | null): string | nul
 
   if (filename) {
     const asciiFilename = filename.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    if (ASSET_MAP[filename]) return ASSET_MAP[filename];
-    if (ASSET_MAP[asciiFilename]) return ASSET_MAP[asciiFilename];
+    if (ASSET_MAP[filename]) return withBase(ASSET_MAP[filename]);
+    if (ASSET_MAP[asciiFilename]) return withBase(ASSET_MAP[asciiFilename]);
 
     const dotIdx = filename.lastIndexOf('.');
     if (dotIdx > 0) {
@@ -142,9 +142,9 @@ export function resolveAssetUrl(rawUrl: string | undefined | null): string | nul
         stem.replace(/-\d+x\d+$/, '').replace(/-scaled$/, '') + ext,
       ];
       for (const candidate of candidates) {
-        if (ASSET_MAP[candidate]) return ASSET_MAP[candidate];
+        if (ASSET_MAP[candidate]) return withBase(ASSET_MAP[candidate]);
         const asciiCand = candidate.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (ASSET_MAP[asciiCand]) return ASSET_MAP[asciiCand];
+        if (ASSET_MAP[asciiCand]) return withBase(ASSET_MAP[asciiCand]);
       }
     }
   }

@@ -13,7 +13,7 @@ import {
   Users,
 } from 'lucide-react';
 import rawTutorialsData from '../../data/tutorials.json';
-import { SITE_IMAGES, type RouteSlug } from '../../data/siteArchitecture';
+import { SITE_IMAGES, withBase, type RouteSlug } from '../../data/siteArchitecture';
 
 export interface TutorialRecord {
   id: string;
@@ -27,7 +27,11 @@ export interface TutorialRecord {
   checkoutUrl: string;
 }
 
-const TUTORIALS: TutorialRecord[] = rawTutorialsData as TutorialRecord[];
+const TUTORIALS: TutorialRecord[] = (rawTutorialsData as TutorialRecord[]).map((tut) => ({
+  ...tut,
+  coverImage: withBase(tut.coverImage),
+  fileUrl: tut.fileUrl ? withBase(tut.fileUrl) : '',
+}));
 
 interface CorePagesProps {
   route: RouteSlug;

@@ -20,12 +20,31 @@ const CORE_PAGE_ROUTES = new Set<string>([
   '/contact/',
 ]);
 
+const BASE_PREFIX = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+
+function stripBasePrefix(pathname: string): string {
+  if (!BASE_PREFIX) return pathname;
+  if (pathname === BASE_PREFIX || pathname === `${BASE_PREFIX}/`) return '/';
+  if (pathname.startsWith(`${BASE_PREFIX}/`)) {
+    return pathname.slice(BASE_PREFIX.length);
+  }
+  return pathname;
+}
+
+function toBrowserUrl(route: RouteSlug): string {
+  if (!BASE_PREFIX || typeof window === 'undefined') return route;
+  const pathname = window.location.pathname;
+  const usingBasePrefix = pathname === BASE_PREFIX || pathname.startsWith(`${BASE_PREFIX}/`);
+  return usingBasePrefix ? `${BASE_PREFIX}${route}` : route;
+}
+
 function normalizeRoutePath(input: string): RouteSlug {
   const trimmed = input.trim();
   if (!trimmed || trimmed === '/') return '/';
 
   const [rawPath, rawHash] = trimmed.split('#');
-  const withoutSlashes = rawPath.replace(/^\/+|\/+$/g, '');
+  const strippedPath = stripBasePrefix(rawPath);
+  const withoutSlashes = strippedPath.replace(/^\/+|\/+$/g, '');
 
   if (withoutSlashes.toLowerCase() === 'tutoriels') {
     return '/boutique/#tutoriels';
@@ -39,9 +58,9 @@ function getInitialRoute(): RouteSlug {
   if (typeof window === 'undefined') return '/';
   const raw = `${window.location.pathname}${window.location.hash || ''}`;
   const normalized = normalizeRoutePath(raw);
-  if (raw.replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
+  if (stripBasePrefix(window.location.pathname).replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
     try {
-      window.history.replaceState({}, '', '/boutique/#tutoriels');
+      window.history.replaceState({}, '', toBrowserUrl('/boutique/#tutoriels'));
     } catch {
       // Ignore history errors in restricted frames
     }
@@ -57,9 +76,9 @@ export default function App() {
     const syncFromLocation = () => {
       const raw = `${window.location.pathname}${window.location.hash || ''}`;
       const normalized = normalizeRoutePath(raw);
-      if (raw.replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
+      if (stripBasePrefix(window.location.pathname).replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
         try {
-          window.history.replaceState({}, '', '/boutique/#tutoriels');
+          window.history.replaceState({}, '', toBrowserUrl('/boutique/#tutoriels'));
         } catch {
           // Ignore
         }
@@ -92,9 +111,10 @@ export default function App() {
     const normalized = normalizeRoutePath(route);
     setCurrentRoute(normalized);
     try {
+      const targetBrowserUrl = toBrowserUrl(normalized);
       const currentFull = `${window.location.pathname}${window.location.hash || ''}`;
-      if (currentFull !== normalized) {
-        window.history.pushState({}, '', normalized);
+      if (currentFull !== targetBrowserUrl) {
+        window.history.pushState({}, '', targetBrowserUrl);
       }
     } catch {
       // Ignore history errors in restricted frames

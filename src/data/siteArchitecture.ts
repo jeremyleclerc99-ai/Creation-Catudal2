@@ -210,29 +210,38 @@ export const BRAND_TOKENS: BrandToken[] = [
   },
 ];
 
+export function withBase(assetPath: string): string {
+  if (!assetPath) return assetPath;
+  if (/^https?:\/\//i.test(assetPath)) return assetPath;
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanPath = assetPath.replace(/^\/+/, '');
+  return `${normalizedBase}${cleanPath}`;
+}
+
 export const SITE_IMAGES = {
-  andreePortrait: '/assets/aistudio/20230522_150609-copie_31f714cf.jpg',
-  andreeAbout: '/assets/aistudio/cef07d91-57de-4eae-b3aa-5f15a0cc3371_f7842d27.jpg',
-  andreeContact: '/assets/aistudio/ef2f6226-af09-4b00-aec0-632b23c5e946-e1791819404700_292b4f0a.jpg',
-  studioShelf: '/assets/aistudio/boutique1_6c4ae985.png',
-  academieClubPoster: '/assets/aistudio/Academie-creative_d0b2eb57.png',
-  academieClubBanner: '/assets/aistudio/Academie-creative-Club-copy_4d3869b5.png',
-  academieCard: '/assets/aistudio/Carte-Academie-creative_fcc8b4c7.png',
-  clubOctober2026: '/assets/aistudio/10-2026_96caad62.png',
-  clubNovember2026: '/assets/aistudio/11-2026_304fd1a6.png',
-  cardClubKit: '/assets/aistudio/20220903_141141-scaled_443c4516.jpg',
-  murmureDesBois: '/assets/aistudio/111633271_3ba5c5a3.jpg',
-  oneSheetWonderPlan: '/assets/aistudio/One-Sheet-Wonder_1482883c.png',
-  communityRetreat: '/assets/aistudio/314630510_628682679050928_2875493947343438474_n-scaled-e1791809253953_a838d41e.jpg',
-  montebelloRetreat2026: '/assets/aistudio/825279544_2323069485180091_1092562817591503218_n_fab23ce4.jpg',
-  catalogueAnnuel: '/assets/aistudio/320015765_642601134214906_7584673778299756548_n_f8035c09.jpg',
-  catalogueSepDec2026: '/assets/aistudio/20260504_125040-e1791825585726_efe855d8.jpg',
-  catalogueAnnuel2023: '/assets/aistudio/olo_ftr_catalog_ac23_qc_0423_eb425395.webp',
-  catalogueHoliday2023: '/assets/aistudio/2023_SD_COVER_24b11b0e.jpg',
-  coursToGoMoments: '/assets/aistudio/Cours-to-go-10-2022_d3358154.jpg',
-  coursToGoJul2022: '/assets/aistudio/Cours-to-go-07-2022_bfeca2b0.jpg',
-  coursToGoFeb2022: '/assets/aistudio/Cours-to-go-02-2022_90c971cf.jpg',
-  coursToGoAug2021: '/assets/aistudio/Cours-to-go-aout-2021_33a0501a.jpg',
+  andreePortrait: withBase('/assets/aistudio/20230522_150609-copie_31f714cf.jpg'),
+  andreeAbout: withBase('/assets/aistudio/cef07d91-57de-4eae-b3aa-5f15a0cc3371_f7842d27.jpg'),
+  andreeContact: withBase('/assets/aistudio/ef2f6226-af09-4b00-aec0-632b23c5e946-e1791819404700_292b4f0a.jpg'),
+  studioShelf: withBase('/assets/aistudio/boutique1_6c4ae985.png'),
+  academieClubPoster: withBase('/assets/aistudio/Academie-creative_d0b2eb57.png'),
+  academieClubBanner: withBase('/assets/aistudio/Academie-creative-Club-copy_4d3869b5.png'),
+  academieCard: withBase('/assets/aistudio/Carte-Academie-creative_fcc8b4c7.png'),
+  clubOctober2026: withBase('/assets/aistudio/10-2026_96caad62.png'),
+  clubNovember2026: withBase('/assets/aistudio/11-2026_304fd1a6.png'),
+  cardClubKit: withBase('/assets/aistudio/20220903_141141-scaled_443c4516.jpg'),
+  murmureDesBois: withBase('/assets/aistudio/111633271_3ba5c5a3.jpg'),
+  oneSheetWonderPlan: withBase('/assets/aistudio/One-Sheet-Wonder_1482883c.png'),
+  communityRetreat: withBase('/assets/aistudio/314630510_628682679050928_2875493947343438474_n-scaled-e1791809253953_a838d41e.jpg'),
+  montebelloRetreat2026: withBase('/assets/aistudio/825279544_2323069485180091_1092562817591503218_n_fab23ce4.jpg'),
+  catalogueAnnuel: withBase('/assets/aistudio/320015765_642601134214906_7584673778299756548_n_f8035c09.jpg'),
+  catalogueSepDec2026: withBase('/assets/aistudio/20260504_125040-e1791825585726_efe855d8.jpg'),
+  catalogueAnnuel2023: withBase('/assets/aistudio/olo_ftr_catalog_ac23_qc_0423_eb425395.webp'),
+  catalogueHoliday2023: withBase('/assets/aistudio/2023_SD_COVER_24b11b0e.jpg'),
+  coursToGoMoments: withBase('/assets/aistudio/Cours-to-go-10-2022_d3358154.jpg'),
+  coursToGoJul2022: withBase('/assets/aistudio/Cours-to-go-07-2022_bfeca2b0.jpg'),
+  coursToGoFeb2022: withBase('/assets/aistudio/Cours-to-go-02-2022_90c971cf.jpg'),
+  coursToGoAug2021: withBase('/assets/aistudio/Cours-to-go-aout-2021_33a0501a.jpg'),
 } as const;
 
 export interface OneSheetCardPhoto {
@@ -250,7 +259,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 1,
     label: 'La carte #1',
     videoNum: 'Vidéo 1',
-    image: '/assets/aistudio/5508005_a60de7e8.jpg',
+    image: withBase('/assets/aistudio/5508005_a60de7e8.jpg'),
     alt: 'Carte #1 du One Sheet Wonder Murmure des bois – La Féerie des Fêtes',
   },
   {
@@ -258,7 +267,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 4,
     label: 'La carte #4',
     videoNum: 'Vidéo 1',
-    image: '/assets/aistudio/221189503_d45ce6c8.jpg',
+    image: withBase('/assets/aistudio/221189503_d45ce6c8.jpg'),
     alt: 'Carte #4 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -266,7 +275,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 2,
     label: 'La carte #2',
     videoNum: 'Vidéo 2',
-    image: '/assets/aistudio/137948487_76ed3a40.jpg',
+    image: withBase('/assets/aistudio/137948487_76ed3a40.jpg'),
     alt: 'Carte #2 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -274,7 +283,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 6,
     label: 'La carte #6',
     videoNum: 'Vidéo 2',
-    image: '/assets/aistudio/130777061_191d066d.jpg',
+    image: withBase('/assets/aistudio/130777061_191d066d.jpg'),
     alt: 'Carte #6 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -282,7 +291,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 7,
     label: 'La carte #7',
     videoNum: 'Vidéo 3',
-    image: '/assets/aistudio/73352619_a33dd5ae.jpg',
+    image: withBase('/assets/aistudio/73352619_a33dd5ae.jpg'),
     alt: 'Carte #7 du One Sheet Wonder Murmure des bois (version 1)',
   },
   {
@@ -290,7 +299,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 7,
     label: 'Carte #7 (variante)',
     videoNum: 'Vidéo 3',
-    image: '/assets/aistudio/34344122_630df9f0.jpg',
+    image: withBase('/assets/aistudio/34344122_630df9f0.jpg'),
     alt: 'Carte #7 du One Sheet Wonder Murmure des bois (variante)',
   },
   {
@@ -298,7 +307,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 5,
     label: 'La carte #5',
     videoNum: 'Vidéo 4',
-    image: '/assets/aistudio/51073548_584dd4c6.jpg',
+    image: withBase('/assets/aistudio/51073548_584dd4c6.jpg'),
     alt: 'Carte #5 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -306,7 +315,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 15,
     label: 'La carte #15',
     videoNum: 'Vidéo 5',
-    image: '/assets/aistudio/108253736_ab92c473.jpg',
+    image: withBase('/assets/aistudio/108253736_ab92c473.jpg'),
     alt: 'Carte #15 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -314,7 +323,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 16,
     label: 'La carte #16',
     videoNum: 'Vidéo 5',
-    image: '/assets/aistudio/23191453_6828077c.jpg',
+    image: withBase('/assets/aistudio/23191453_6828077c.jpg'),
     alt: 'Carte #16 du One Sheet Wonder Murmure des bois',
   },
   {
@@ -322,7 +331,7 @@ export const ONE_SHEET_WONDER_CARDS: OneSheetCardPhoto[] = [
     pieceNumber: 17,
     label: 'La carte #17',
     videoNum: 'Vidéo 5',
-    image: '/assets/aistudio/123999926_b460ef88.jpg',
+    image: withBase('/assets/aistudio/123999926_b460ef88.jpg'),
     alt: 'Carte #17 du One Sheet Wonder Murmure des bois',
   },
 ];
