@@ -31,20 +31,27 @@ function stripBasePrefix(pathname: string): string {
   return pathname;
 }
 
-function toBrowserUrl(route: RouteSlug): string {
-  if (!BASE_PREFIX || typeof window === 'undefined') return route;
+function getBasePathname(): string {
+  if (typeof window === 'undefined') return `${BASE_PREFIX}/`;
   const pathname = window.location.pathname;
-  const usingBasePrefix = pathname === BASE_PREFIX || pathname.startsWith(`${BASE_PREFIX}/`);
-  return usingBasePrefix ? `${BASE_PREFIX}${route}` : route;
+  if (BASE_PREFIX && (pathname === BASE_PREFIX || pathname.startsWith(`${BASE_PREFIX}/`))) {
+    return `${BASE_PREFIX}/`;
+  }
+  return '/';
 }
 
 function normalizeRoutePath(input: string): RouteSlug {
   const trimmed = input.trim();
-  if (!trimmed || trimmed === '/') return '/';
+  if (!trimmed || trimmed === '/' || trimmed === '#/' || trimmed === '#') return '/';
 
-  const [rawPath, rawHash] = trimmed.split('#');
+  const withoutLeadingHash = trimmed.startsWith('#/') ? trimmed.slice(1) : trimmed;
+  const [rawPath, rawHash] = withoutLeadingHash.split('#');
   const strippedPath = stripBasePrefix(rawPath);
   const withoutSlashes = strippedPath.replace(/^\/+|\/+$/g, '');
+
+  if (withoutSlashes.toLowerCase() === 'index.html') {
+    return rawHash ? (`/#${rawHash}` as RouteSlug) : '/';
+  }
 
   if (withoutSlashes.toLowerCase() === 'tutoriels') {
     return '/boutique/#tutoriels';
@@ -54,18 +61,37 @@ function normalizeRoutePath(input: string): RouteSlug {
   return (rawHash ? `${basePath}#${rawHash}` : basePath) as RouteSlug;
 }
 
+function readRouteFromWindow(): { route: RouteSlug; wasLegacyTutoriels: boolean } {
+  if (typeof window === 'undefined') return { route: '/', wasLegacyTutoriels: false };
+  const hash = window.location.hash || '';
+  if (hash.startsWith('#/')) {
+    const rawHashRoute = hash.slice(1);
+    const wasLegacyTutoriels =
+      rawHashRoute.split('#')[0].replace(/^\/+|\/+$/g, '').toLowerCase() === 'tutoriels';
+    return { route: normalizeRoutePath(rawHashRoute), wasLegacyTutoriels };
+  }
+  const strippedPath = stripBasePrefix(window.location.pathname);
+  const wasLegacyTutoriels =
+    strippedPath.replace(/^\/+|\/+$/g, '').toLowerCase() === 'tutoriels';
+  const raw = `${strippedPath}${hash}`;
+  return { route: normalizeRoutePath(raw), wasLegacyTutoriels };
+}
+
+function toHashBrowserUrl(route: RouteSlug): string {
+  const basePath = getBasePathname();
+  return route === '/' ? `${basePath}#/` : `${basePath}#${route}`;
+}
+
 function getInitialRoute(): RouteSlug {
-  if (typeof window === 'undefined') return '/';
-  const raw = `${window.location.pathname}${window.location.hash || ''}`;
-  const normalized = normalizeRoutePath(raw);
-  if (stripBasePrefix(window.location.pathname).replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
+  const { route, wasLegacyTutoriels } = readRouteFromWindow();
+  if (typeof window !== 'undefined' && wasLegacyTutoriels) {
     try {
-      window.history.replaceState({}, '', toBrowserUrl('/boutique/#tutoriels'));
+      window.history.replaceState({}, '', toHashBrowserUrl('/boutique/#tutoriels'));
     } catch {
       // Ignore history errors in restricted frames
     }
   }
-  return normalized;
+  return route;
 }
 
 export default function App() {
@@ -74,16 +100,15 @@ export default function App() {
 
   useEffect(() => {
     const syncFromLocation = () => {
-      const raw = `${window.location.pathname}${window.location.hash || ''}`;
-      const normalized = normalizeRoutePath(raw);
-      if (stripBasePrefix(window.location.pathname).replace(/\/+$/, '').toLowerCase() === '/tutoriels') {
+      const { route, wasLegacyTutoriels } = readRouteFromWindow();
+      if (wasLegacyTutoriels) {
         try {
-          window.history.replaceState({}, '', toBrowserUrl('/boutique/#tutoriels'));
+          window.history.replaceState({}, '', toHashBrowserUrl('/boutique/#tutoriels'));
         } catch {
           // Ignore
         }
       }
-      setCurrentRoute(normalized);
+      setCurrentRoute(route);
     };
     window.addEventListener('popstate', syncFromLocation);
     window.addEventListener('hashchange', syncFromLocation);
@@ -111,7 +136,7 @@ export default function App() {
     const normalized = normalizeRoutePath(route);
     setCurrentRoute(normalized);
     try {
-      const targetBrowserUrl = toBrowserUrl(normalized);
+      const targetBrowserUrl = toHashBrowserUrl(normalized);
       const currentFull = `${window.location.pathname}${window.location.hash || ''}`;
       if (currentFull !== targetBrowserUrl) {
         window.history.pushState({}, '', targetBrowserUrl);
