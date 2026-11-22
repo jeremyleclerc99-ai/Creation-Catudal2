@@ -592,102 +592,54 @@ export const CorePages: React.FC<CorePagesProps> = ({ route, onNavigate }) => {
         )}
 
         {baseRoute === '/catalogues-stampinup/' && (
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-10">
             <div className="max-w-2xl space-y-3">
               <p className="text-xs font-medium uppercase tracking-wider text-[#007580]">
                 URL conservée : /catalogues-stampinup/
               </p>
-              <h1 className="text-3xl font-semibold">Catalogues Stampin’ Up! en vigueur</h1>
+              <h1 className="text-3xl font-semibold">Catalogue Stampin’ Up! en vigueur</h1>
               <p className="text-base text-[#526669]">
-                Feuilletez les collections actuelles en format numérique ou demandez votre exemplaire papier gratuit (au Canada).
+                Feuilletez la collection actuelle en format numérique ou demandez votre exemplaire papier gratuit (au Canada).
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  title: 'Catalogue Septembre–Décembre 2026',
-                  desc: 'Collections festives des Fêtes, projets d’automne, calendriers de l’Avent et souvenirs saisonniers.',
-                  image: SITE_IMAGES.catalogueSepDec2026,
-                  alt: 'Couverture du catalogue Stampin Up Septembre-Décembre 2026',
-                },
-                {
-                  title: 'Catalogue Annuel Stampin’ Up!',
-                  desc: 'Toutes les couleurs phares, jeux d’étampes classiques, encres, outils de coupe et adhésifs.',
-                  image: SITE_IMAGES.catalogueAnnuel,
-                  alt: 'Couverture du Catalogue Annuel Stampin Up',
-                },
-              ].map((cat) => (
-                <div key={cat.title} className="bg-white border border-[#DADADA] rounded-2xl overflow-hidden flex flex-col justify-between">
-                  <div className="aspect-[4/3] bg-[#F8FAFA] border-b border-[#DADADA] overflow-hidden">
-                    <img
-                      src={cat.image}
-                      alt={cat.alt}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain p-3"
-                    />
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-center gap-2 text-xs font-medium text-[#007580]">
-                      <BookOpen className="w-4 h-4" />
-                      <span>Édition francophone · Canada</span>
-                    </div>
-                    <h2 className="text-xl font-semibold">{cat.title}</h2>
-                    <p className="text-sm text-[#526669]">{cat.desc}</p>
-                    <div className="flex flex-wrap gap-3 pt-1">
-                      <a
-                        href="https://www.stampinup.ca/fr/?demoid=2126905"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-4 py-2 text-xs font-medium text-white bg-[#007580] hover:bg-[#0095A9] rounded-lg transition-colors"
-                      >
-                        Consulter en ligne
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => go('/contact/')}
-                        className="px-4 py-2 text-xs font-medium text-[#1A2B2E] border border-[#DADADA] hover:border-[#007580] rounded-lg cursor-pointer transition-colors"
-                      >
-                        Demander la version papier
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
 
-            <div className="space-y-4 pt-2">
-              <h2 className="text-xl font-semibold text-[#1A2B2E]">Éditions d’archives et inspiration</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {[
-                  {
-                    title: 'Catalogue Annuel 2023–2024',
-                    image: SITE_IMAGES.catalogueAnnuel2023,
-                    alt: 'Couverture du Catalogue Annuel Mai 2023 à Avril 2024',
-                  },
-                  {
-                    title: 'Mini-Catalogue Septembre–Décembre 2023',
-                    image: SITE_IMAGES.catalogueHoliday2023,
-                    alt: 'Couverture du Mini-Catalogue Septembre-Décembre 2023',
-                  },
-                ].map((arch) => (
-                  <figure
-                    key={arch.title}
-                    className="bg-[#F8FAFA] border border-[#DADADA] rounded-2xl overflow-hidden flex items-center gap-4 p-4"
+            <div className="bg-white border border-[#DADADA] rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12">
+              <div className="md:col-span-5 aspect-[4/3] md:aspect-auto bg-[#F8FAFA] border-b md:border-b-0 md:border-r border-[#DADADA] overflow-hidden flex items-center justify-center">
+                <img
+                  src={SITE_IMAGES.catalogueSepDec2026}
+                  alt="Couverture du catalogue Stampin Up Septembre-Décembre 2026"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full max-h-[380px] object-contain p-4"
+                />
+              </div>
+              <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-center space-y-4">
+                <div className="flex items-center gap-2 text-xs font-medium text-[#007580]">
+                  <BookOpen className="w-4 h-4" />
+                  <span>Édition francophone · Canada</span>
+                </div>
+                <h2 className="text-2xl font-semibold text-[#1A2B2E]">
+                  Catalogue Septembre–Décembre 2026
+                </h2>
+                <p className="text-sm sm:text-base text-[#526669] leading-relaxed">
+                  Collections festives des Fêtes, projets d’automne, calendriers de l’Avent et souvenirs saisonniers.
+                </p>
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <a
+                    href="https://www.stampinup.ca/fr/?demoid=2126905"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-5 py-2.5 text-xs font-medium text-white bg-[#007580] hover:bg-[#0095A9] rounded-lg transition-colors"
                   >
-                    <img
-                      src={arch.image}
-                      alt={arch.alt}
-                      referrerPolicy="no-referrer"
-                      className="w-24 h-28 object-cover rounded-lg border border-[#DADADA] shrink-0 bg-white"
-                    />
-                    <figcaption className="space-y-1">
-                      <p className="text-sm font-semibold text-[#1A2B2E]">{arch.title}</p>
-                      <p className="text-xs text-[#526669]">
-                        Source d’inspiration de modèles et d’agencements de couleurs sur le blog.
-                      </p>
-                    </figcaption>
-                  </figure>
-                ))}
+                    Consulter en ligne
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => go('/contact/')}
+                    className="px-5 py-2.5 text-xs font-medium text-[#1A2B2E] border border-[#DADADA] hover:border-[#007580] rounded-lg cursor-pointer transition-colors"
+                  >
+                    Demander la version papier
+                  </button>
+                </div>
               </div>
             </div>
           </div>
